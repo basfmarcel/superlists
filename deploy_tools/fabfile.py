@@ -37,7 +37,7 @@ def _create_or_update_dotenv():
     current_contets = run("cat .env")
     if "DJANGO_SECRET_KEY" not in current_contets:
         new_secret = "".join(
-            random.SystemRandom.choices(population="abcdefghifklmnopqrstuvwxyz0123456789", k=50)
+            random.SystemRandom.choices(self=self, population="abcdefghifklmnopqrstuvwxyz0123456789", k=50)
         )
         append(".env", f"DJANGO_SECRET_KEY={new_secret}")
 
