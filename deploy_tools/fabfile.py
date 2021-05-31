@@ -2,7 +2,7 @@ import random
 from fabric.contrib.files import append, exists
 from fabric.api import cd, env, local, run
 
-REPO_URL = "https://github.com/corellma/superlists.git"
+REPO_URL = "git@github.com:corellma/superlists.git"
 
 
 def deploy():
@@ -18,7 +18,7 @@ def deploy():
 
 def _get_latest_source():
     if exists(".git"):
-        run("git fetch")
+        run("git fetch git@github.com:corellma/superlists.git")
     else:
         run(f"git clone {REPO_URL} .")
     current_commit = local("git log -n 1 --format=%H", capture=True)

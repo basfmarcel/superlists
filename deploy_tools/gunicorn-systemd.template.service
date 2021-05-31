@@ -4,8 +4,8 @@ Description=Gunicorn server for DOMAIN
 [Service]
 Restart=on-failure
 User=mc
-WorkingDirectory=/home/sites/DOMAIN
-EnvironmentFile=/home/sites/DOMAIN/.env
+WorkingDirectory=/home/mc/sites/DOMAIN
+EnvironmentFile=/home/mc/sites/DOMAIN/.env
 
 ExecStart=/home/mc/sites/DOMAIN/virtualenv/bin/gunicorn --bind unix:/tmp/DOMAIN.socket superlists.wsgi:application
 
