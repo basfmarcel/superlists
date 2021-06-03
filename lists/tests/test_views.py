@@ -17,6 +17,27 @@ class HomePageTest(TestCase):
 
 
 class ListViewTest(TestCase):
+    def post_invalid_input(self):
+        list_ = List.objects.create()
+        return self.client.post(f"/lists/{list_.id}/", data={"text": ""})
+
+    def test_for_invalid_input_nothing_saved_to_db(self):
+        self.post_invalid_input()
+        self.assertEqual(Item.objects.count(), 0)
+
+    def test_for_invalid_input_renders_list_template(self):
+        response = self.post_invalid_input()
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "list.html")
+
+    def test_for_invalid_input_passes_form_to_template(self):
+        response = self.post_invalid_input()
+        self.assertIsInstance(response.context["form"], ItemForm)
+
+    def test_for_invalid_input_shows_error_on_page(self):
+        response = self.post_invalid_input()
+        self.assertContains(response, escape(EMPTY_ITEM_ERROR))
+
     def test_uses_list_template(self):
         list_ = List.objects.create()
         response = self.client.get(f"/lists/{list_.id}/")
@@ -80,6 +101,12 @@ class ListViewTest(TestCase):
     def test_for_invalid_input_passes_form_to_template(self):
         response = self.client.post(f"/lists/new", data={"text": ""})
         self.assertIsInstance(response.context["form"], ItemForm)
+
+    def test_displays_item_form(self):
+        list_ = List.objects.create()
+        response = self.client.get(f"/lists/{list_.id}/")
+        self.assertIsInstance(response.context["form"], ItemForm)
+        self.assertContains(response, 'name="text"')
 
 
 class NewListTest(TestCase):
