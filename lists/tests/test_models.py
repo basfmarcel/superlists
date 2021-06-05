@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 class ItemModelTest(TestCase):
     def test_default_text(self):
         item = Item()
-        self.assertEqual(item.text, '')
+        self.assertEqual(item.text, "")
 
     def test_item_is_related_to_list(self):
         list_ = List.objects.create()
