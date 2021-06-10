@@ -7,8 +7,8 @@ from .base import FunctionalTest
 TEST_EMAIL = "marcel.corell.94@gmail.com"
 SUBJECT = "Your login link for Superlists"
 
-class LoginTest(FunctionalTest):
 
+class LoginTest(FunctionalTest):
     def test_can_get_email_link_to_login(self):
         # Edith goes to the awesome superlists site
         # and notices a login section in the navbar for the first time
@@ -18,9 +18,9 @@ class LoginTest(FunctionalTest):
         self.browser.find_element_by_name("email").send_keys(Keys.ENTER)
 
         # A message appears telling her an email has been sent
-        self.wait_for(lambda: self.assertIn(
-            "Check your email",
-            self.browser.find_element_by_tag_name("body").text
+        self.wait_for(
+            lambda: self.assertIn(
+                "Check your email", self.browser.find_element_by_tag_name("body").text
             )
         )
 
@@ -30,10 +30,10 @@ class LoginTest(FunctionalTest):
         self.assertEqual(SUBJECT, email.subject)
 
         # It has a URL link in it
-        self.assertIn("Use this link to login", email.body)
-        url_search = re.search(r'http://.+/.+$', email.body)
+        self.assertIn("Use this link to log in", email.body)
+        url_search = re.search(r"http://.+/.+$", email.body)
         if not url_search:
-            self.fail(f'Could not find url in email body:\n{email.body}')
+            self.fail(f"Could not find url in email body:\n{email.body}")
         url = url_search.group(0)
         self.assertIn(self.live_server_url, url)
 
@@ -41,11 +41,6 @@ class LoginTest(FunctionalTest):
         self.browser.get(url)
 
         # She is logged in
-        self.wait_for(
-            lambda: self.browser.find_element_by_link_text("Log out")
-        )
+        self.wait_for(lambda: self.browser.find_element_by_link_text("Log out"))
         navbar = self.browser.find_element_by_css_selector(".navbar")
         self.assertIn(TEST_EMAIL, navbar.text)
-
-
-    
