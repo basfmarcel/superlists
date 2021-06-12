@@ -12,7 +12,7 @@ eg, on Ubuntu:
 
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt update
-    sudo apt install nginx git python39 python 3.9-venv
+    sudo apt install nginx git python3.9 python3-venv
 
 ##  Nginx Virtual Host config
 
