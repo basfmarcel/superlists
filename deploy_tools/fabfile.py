@@ -1,6 +1,9 @@
 import random
 from fabric.contrib.files import append, exists
 from fabric.api import cd, env, local, run
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 REPO_URL = "git@github.com:corellma/superlists.git"
 
@@ -34,12 +37,14 @@ def _update_virtualenv():
 def _create_or_update_dotenv():
     append(".env", "DJANGO_DEBUG_FALSE=y")
     append(".env", f"SITENAME={env.host}")
-    current_contets = run("cat .env")
-    if "DJANGO_SECRET_KEY" not in current_contets:
+    current_contents = run("cat .env")
+    if "DJANGO_SECRET_KEY" not in current_contents:
         new_secret = "".join(
             random.choices("abcdefghifklmnopqrstuvwxyz0123456789", k=50)
         )
         append(".env", f"DJANGO_SECRET_KEY={new_secret}")
+    email_password = os.environ["EMAIL_PASSWORD"]
+    append(".env", f"EMAIL_PASSWORD={email_password}")
 
 
 def _update_static_files():
