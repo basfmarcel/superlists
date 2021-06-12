@@ -13,7 +13,7 @@ def send_login_email(request):
     nr = send_mail(
         "Your login link for Superlists", message_body, "mailbot.mc@gmail", [email], fail_silently=False,
     )
-    print(nr)
+    self.stdout.write(nr)
     messages.success(
         request, "Check your email, we've sent you a link you can use to log in."
     )
