@@ -10,10 +10,9 @@ def send_login_email(request):
     token = Token.objects.create(email=email)
     url = request.build_absolute_uri(reverse("login") + "?token=" + str(token.uid))
     message_body = f"Use this link to log in:\n{url}"
-    nr = send_mail(
+    send_mail(
         "Your login link for Superlists", message_body, "mailbot.mc@gmail", [email], fail_silently=False,
     )
-    self.stdout.write(nr)
     messages.success(
         request, "Check your email, we've sent you a link you can use to log in."
     )
