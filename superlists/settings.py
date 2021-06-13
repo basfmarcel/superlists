@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -44,6 +45,20 @@ EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASSWORD"]
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {"level": "DEBUG", "class": "logging.StreamHandler"},
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+        },
+    },
+    "root": {"level": "INFO"},
+}
+
 INSTALLED_APPS = [
     # "django.contrib.admin",
     "django.contrib.auth",
@@ -53,7 +68,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "lists",
     "accounts",
-    "functional_tests"
+    "functional_tests",
 ]
 
 MIDDLEWARE = [

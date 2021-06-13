@@ -3,6 +3,7 @@ from fabric.contrib.files import append, exists
 from fabric.api import cd, env, local, run
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 REPO_URL = "git@github.com:corellma/superlists.git"

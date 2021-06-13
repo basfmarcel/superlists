@@ -17,7 +17,7 @@ class LoginTest(FunctionalTest):
             self.assertIn(test_email, email.to)
             self.assertEqual(subject, email.subject)
             return email.body
-        
+
         email_id = None
         start = time.time()
         inbox = poplib.POP3_SSL("pop.gmail.com")
@@ -27,7 +27,7 @@ class LoginTest(FunctionalTest):
             while time.time() - start < 60:
                 # get 10 newest messages
                 count, _ = inbox.stat()
-                for i in reversed(range(max(1, count - 10), count +1)):
+                for i in reversed(range(max(1, count - 10), count + 1)):
                     print("getting msg", i)
                     _, lines, __ = inbox.retr(i)
                     lines = [l.decode("utf-8") for l in lines]
