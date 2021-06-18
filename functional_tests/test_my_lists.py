@@ -7,7 +7,6 @@ User = get_user_model()
 
 
 class MyListsTest(FunctionalTest):
-
     def test_logged_in_users_lists_are_saved_as_my_lists(self):
         # A is a logged-in user
         self.create_pre_authenticated_session("a@b.com")
@@ -18,7 +17,7 @@ class MyListsTest(FunctionalTest):
         # self.add_list_item("Immanentize eschaton")
         # Bei Hinzufügen des zweiten Elements kommt es zu einem unerwarteten Fehler.
         # Das zweite Element wird an erster Stelle eingefügt, erhält "1: ..."
-        # Das eigentlich erste Element wird an zweite Stelle geschoben 
+        # Das eigentlich erste Element wird an zweite Stelle geschoben
         # und erhält "2: ..."
         first_list_url = self.browser.current_url
 

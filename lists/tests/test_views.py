@@ -6,6 +6,7 @@ from django.utils.html import escape
 import unittest
 from unittest.mock import patch, Mock
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 from lists.forms import ExistingListItemForm, ItemForm, EMPTY_ITEM_ERROR
 
@@ -147,7 +148,7 @@ class NewListViewIntegratedTest(TestCase):
         self.client.post("/lists/new", data={"text": ""})
         self.assertEqual(List.objects.count(), 0)
         self.assertEqual(Item.objects.count(), 0)
-    
+
     def test_list_owner_is_saved_if_user_is_authenticated(self):
         user = User.objects.create(email="a@b.com")
         self.client.force_login(user)
@@ -157,7 +158,6 @@ class NewListViewIntegratedTest(TestCase):
 
 
 class MyListsTest(TestCase):
-
     def test_my_lists_url_renders_my_lists_template(self):
         User.objects.create(email="a@b.com")
         response = self.client.get("/lists/users/a@b.com/")
@@ -172,7 +172,6 @@ class MyListsTest(TestCase):
 
 @patch("lists.views.NewListForm")
 class NewListViewUnitTest(unittest.TestCase):
-
     def setUp(self):
         self.request = HttpRequest()
         self.request.POST["text"] = "new list item"
@@ -181,13 +180,13 @@ class NewListViewUnitTest(unittest.TestCase):
     def test_passes_POST_data_to_NewListForm(self, mockNewListForm):
         new_list(self.request)
         mockNewListForm.assert_called_once_with(data=self.request.POST)
-    
+
     def test_saves_form_with_owner_if_form_valid(self, mockNewListForm):
         mock_form = mockNewListForm.return_value
         mock_form.is_valid.return_value = True
         new_list(self.request)
         mock_form.save.assert_called_once_with(owner=self.request.user)
-    
+
     @patch("lists.views.redirect")
     def test_redirects_to_form_returned_object_if_form_is_valid(
         self, mock_redirect, mockNewListForm
@@ -199,7 +198,7 @@ class NewListViewUnitTest(unittest.TestCase):
 
         self.assertEqual(response, mock_redirect.return_value)
         mock_redirect.assert_called_once_with(mock_form.save.return_value)
-    
+
     @patch("lists.views.render")
     def test_renders_home_template_with_form_if_form_is_invalid(
         self, mock_render, mock_NewListForm
@@ -213,7 +212,7 @@ class NewListViewUnitTest(unittest.TestCase):
         mock_render.assert_called_once_with(
             self.request, "home.html", {"form": mock_form}
         )
-    
+
     def test_does_not_save_if_form_invalid(self, mock_NewListForm):
         mock_form = mock_NewListForm.return_value
         mock_form.is_valid.return_value = False

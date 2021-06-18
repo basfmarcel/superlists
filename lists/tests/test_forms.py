@@ -59,9 +59,7 @@ class NewListFormTest(unittest.TestCase):
         form = NewListForm(data={"text": "new item text"})
         form.is_valid()
         form.save(owner=user)
-        mock_List_create_new.assert_called_once_with(
-            first_item_text="new item text"
-        )
+        mock_List_create_new.assert_called_once_with(first_item_text="new item text")
 
     @patch("lists.forms.List.create_new")
     def test_save_creates_new_list_and_item_from_post_data_if_user_authenticated(

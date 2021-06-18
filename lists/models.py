@@ -12,7 +12,7 @@ class List(models.Model):
     @property
     def name(self):
         return self.item_set.first().text
-    
+
     @staticmethod
     def create_new(first_item_text, owner=None):
         list_ = List.objects.create(owner=owner)
