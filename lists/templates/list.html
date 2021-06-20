@@ -5,6 +5,7 @@
 {% block form_action %}{% url 'view_list' list.id %}{% endblock %}
 
 {% block table %}
+    <p id="id_list_owner">List Owner: {{ list.owner.email }}<p>
     <table id="id_list_table" class="table">
         {% for item in list.item_set.all %}
             <tr><td>{{forloop.counter}}: {{item.text}}</td></tr>
@@ -13,9 +14,15 @@
 {% endblock %}
 
 {% block sharing %}
+    <p>List shared with:</p>
+    <ul class="list-group list-group-flush">
+        {% for recipient in list.shared_with.all %}
+            <li class="list-group-item">{{recipient.email}}</li>
+        {% endfor %}
+    </ul>
     <form method="POST" action="{% url 'share_list' list.id %}">
         <span>Share this list:</span>
-        <input class="form-control" name="share" type="text" />
+        <input class="form-control" name="share" type="text" placeholder="your-friend@example.com" />
         {% csrf_token %}
     </form>
 {% endblock %}

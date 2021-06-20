@@ -224,5 +224,11 @@ class ListShareTest(TestCase):
 
     def test_POST_redirects_to_list_page(self):
         list_ = List.objects.create()
-        response = self.client.post(f"/lists/{list_.id}/share")
+        response = self.client.post(f"/lists/{list_.id}/share", data={"share": ""})
         self.assertRedirects(response, f"/lists/{list_.id}/")
+    
+    def test_email_is_added_to_shared_with_list(self):
+        user = User.objects.create(email="a@b.com")
+        list_ = List.objects.create()
+        self.client.post(f"/lists/{list_.id}/share", data={"share": user.email})
+        self.assertIn(user, list_.shared_with.all())
