@@ -32,7 +32,7 @@ class SharingTest(FunctionalTest):
         # She notices a "share this list" option
         share_box = list_page.get_share_box()
         self.assertEqual(
-            share_box.get_attribute("placeholder"), "your-friend@example.com"
+            share_box.get_attribute("placeholder"), "friend@example.com"
         )
 
         # She shares her list.
