@@ -19,7 +19,7 @@
             <h3>List shared with:</h3>
             <ul>
                 {% for recipient in list.shared_with.all %}
-                    <li>{{recipient.email}}</li>
+                    <li name="shared">{{recipient.email}}</li>
                 {% endfor %}
             </ul>
         </div>

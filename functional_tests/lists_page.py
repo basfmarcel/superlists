@@ -29,7 +29,7 @@ class ListPage(object):
         return self.test.browser.find_element_by_css_selector("input[name='share']")
 
     def get_shared_with_list(self):
-        return self.test.browser.find_elements_by_css_selector(".list-group-item")
+        return self.test.browser.find_elements_by_css_selector("li[name='shared']")
 
     def share_list_with(self, email):
         self.get_share_box().send_keys(email)

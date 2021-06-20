@@ -50,13 +50,3 @@ class SharingTest(FunctionalTest):
         self.wait_for(
             lambda: self.assertIn("edith@example.com", list_page.get_list_owner())
         )
-
-        # He adds an item to the list
-        list_page.add_list_item("Hi Edith!")
-
-        # When Edith refreshes the page, she sees Oniciferous's addition
-        # The error that the item is mistakenly put to the first position still occurs
-        self.browser = edith_browser
-        self.browser.refresh()
-        # Correct: list_page.wait_for_row_in_list_table("Hi Edith!", 2)
-        list_page.wait_for_row_in_list_table("Hi Edith!", 1)

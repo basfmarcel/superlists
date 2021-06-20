@@ -6,6 +6,7 @@ import time
 import os
 
 from .base import FunctionalTest
+from .lists_page import ListPage
 
 SUBJECT = "Your login link for Superlists"
 
