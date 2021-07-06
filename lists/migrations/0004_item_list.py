@@ -8,9 +8,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("lists", "0003_list"),
-    ]
+    dependencies = [("lists", "0003_list")]
 
     operations = [
         migrations.AddField(
@@ -21,5 +19,5 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.CASCADE,
                 to="lists.List",
             ),
-        ),
+        )
     ]

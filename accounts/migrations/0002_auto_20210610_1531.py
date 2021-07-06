@@ -8,9 +8,7 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("accounts", "0001_initial"),
-    ]
+    dependencies = [("accounts", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
@@ -29,10 +27,7 @@ class Migration(migrations.Migration):
                 ("email", models.EmailField(max_length=254)),
             ],
         ),
-        migrations.RemoveField(
-            model_name="user",
-            name="id",
-        ),
+        migrations.RemoveField(model_name="user", name="id"),
         migrations.AlterField(
             model_name="user",
             name="email",

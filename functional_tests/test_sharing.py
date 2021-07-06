@@ -31,9 +31,7 @@ class SharingTest(FunctionalTest):
 
         # She notices a "share this list" option
         share_box = list_page.get_share_box()
-        self.assertEqual(
-            share_box.get_attribute("placeholder"), "friend@example.com"
-        )
+        self.assertEqual(share_box.get_attribute("placeholder"), "friend@example.com")
 
         # She shares her list.
         # The page updates to say that it's shared with Oniciferous:

@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                         serialize=False,
                         verbose_name="ID",
                     ),
-                ),
+                )
             ],
-        ),
+        )
     ]

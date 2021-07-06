@@ -8,14 +8,14 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('lists', '0008_auto_20210619_1416'),
-    ]
+    dependencies = [("lists", "0008_auto_20210619_1416")]
 
     operations = [
         migrations.AlterField(
-            model_name='list',
-            name='shared_with',
-            field=models.ManyToManyField(related_name='shared_with', to=settings.AUTH_USER_MODEL),
-        ),
+            model_name="list",
+            name="shared_with",
+            field=models.ManyToManyField(
+                related_name="shared_with", to=settings.AUTH_USER_MODEL
+            ),
+        )
     ]

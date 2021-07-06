@@ -35,9 +35,7 @@ else:
 # Application definition
 
 AUTH_USER_MODEL = "accounts.User"
-AUTHENTICATION_BACKENDS = [
-    "accounts.authentication.PasswordlessAuthenticationBackend",
-]
+AUTHENTICATION_BACKENDS = ["accounts.authentication.PasswordlessAuthenticationBackend"]
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "mailbot.mc@gmail.com"
@@ -48,14 +46,8 @@ EMAIL_USE_TLS = True
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {
-        "console": {"level": "DEBUG", "class": "logging.StreamHandler"},
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"],
-        },
-    },
+    "handlers": {"console": {"level": "DEBUG", "class": "logging.StreamHandler"}},
+    "loggers": {"django": {"handlers": ["console"]}},
     "root": {"level": "INFO"},
 }
 
@@ -94,9 +86,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-            ],
+            ]
         },
-    },
+    }
 ]
 
 WSGI_APPLICATION = "superlists.wsgi.application"
@@ -110,8 +102,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
         "USER": "postgres",
-        "HOST": "db", # set in docker compose
-        "PORT": 5432 # default postgres port
+        "HOST": "db",  # set in docker compose
+        "PORT": 5432,  # default postgres port
     }
 }
 
@@ -121,17 +113,11 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 
